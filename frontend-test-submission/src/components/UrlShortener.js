@@ -5,9 +5,9 @@ import { logEvent } from "../utils/logger";
 function UrlShorteners() {
   const [urls, setUrls] = useState([""]);
   const [results, setResults] = useState([]);
-  const token = "apna-auth-token-yaha-daal"; // apna token daalna
+  const token = "apna-auth-token-yaha-daal";
 
-  // URL Add karne wala function
+
   const handleAddUrl = () => {
     if (urls.length < 5) {
       setUrls([...urls, ""]);
@@ -16,14 +16,14 @@ function UrlShorteners() {
     }
   };
 
-  // URL input ka value set karne ka function
+
   const handleChange = (index, value) => {
     const newUrls = [...urls];
     newUrls[index] = value;
     setUrls(newUrls);
   };
 
-  // URL Shorten karne wala function
+
   const handleShorten = () => {
     urls.forEach((url) => {
       if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -42,14 +42,11 @@ function UrlShorteners() {
         shortCode: shortCode,
       };
 
-      // Result add karo
       setResults((prev) => [...prev, shortUrlObj]);
-      // Save to localStorage
       const existing = JSON.parse(localStorage.getItem("shortLinks")) || [];
       existing.push(shortUrlObj);
       localStorage.setItem("shortLinks", JSON.stringify(existing));
 
-      // Log bhejo
       logEvent("info", "component", `Short URL banaya: ${shortUrlObj.shortUrl}`, token);
     });
   };

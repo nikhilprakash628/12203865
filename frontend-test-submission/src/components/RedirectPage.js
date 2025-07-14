@@ -5,7 +5,7 @@ import { logEvent } from "../utils/logger";
 function Rp() {
   const { shortcode } = useParams();
   const navigate = useNavigate();
-  const token = "apna-auth-token-yaha-daal"; // apna token yaha
+  const token = "apna-auth-token-yaha-daal";
 
   useEffect(() => {
     const storedLinks = JSON.parse(localStorage.getItem("shortLinks")) || [];
@@ -29,10 +29,9 @@ function Rp() {
       return;
     }
 
-    // Click count badhao
-    storedLinks[linkIndex].clickCount = (storedLinks[linkIndex].clickCount || 0) + 1;
+storedLinks[linkIndex].clickCount = (storedLinks[linkIndex].clickCount || 0) + 1;
 
-    // Click history update karo
+
     const clickDetails = {
       time: now.toLocaleString(),
       source: "direct",
@@ -42,13 +41,10 @@ function Rp() {
     storedLinks[linkIndex].clickDetails = storedLinks[linkIndex].clickDetails || [];
     storedLinks[linkIndex].clickDetails.push(clickDetails);
 
-    // localStorage me save karo
     localStorage.setItem("shortLinks", JSON.stringify(storedLinks));
 
-    // Log Event
     logEvent("info", "route", `Redirected: ${shortcode}`, token);
 
-    // Original URL pe redirect
     window.location.href = link.originalUrl;
 
   }, [shortcode, navigate]);

@@ -4,9 +4,8 @@ import { logEvent } from "../utils/logger";
 
 function Ustat() {
   const [links, setLinks] = useState([]);
-  const token = "apna-auth-token-yaha-daal"; // apna token yaha
+  const token = "apna-auth-token-yaha-daal";
 
-  // Jaise hi page khule, localStorage se data uthao
   useEffect(() => {
     const storedLinks = JSON.parse(localStorage.getItem("shortLinks")) || [];
     setLinks(storedLinks);
